@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Orin Code — Free AI Coding Workspace for Windows</title>
+<meta name="description" content="Orin Code: a free AI coding workspace with chat, IDE, terminal, MCP tools, computer use and phone approvals. Download for Windows. CLI and VS Code extension included." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+  :root {
+    --bg: #fafaf9; --panel: #ffffff; --ink: #1c1917; --mut: #78716c;
+    --line: rgba(0,0,0,.08); --cyan: #0891b2; --amber: #d97706;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Space Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #fbbf24; color: #000; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(250,250,249,.8); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, #fbbf24, #f97316); box-shadow: 0 0 14px rgba(251,191,36,.7); }
+  .navlinks a { color: var(--mut); text-decoration: none; font-size: 13px; font-weight: 500; margin-left: 24px; }
+  .navlinks a:hover { color: var(--ink); }
+  .hero { padding: 140px 0 40px; text-align: center; }
+  .emblem { width: 76px; height: 76px; margin: 0 auto 22px; filter: drop-shadow(0 14px 28px rgba(217,119,6,.35)); animation: float 5s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-7px); } }
+  .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 8px 18px; font-size: 12px; color: var(--mut); margin-bottom: 26px; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+  .pill .live { width: 7px; height: 7px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 10px #16a34a; animation: pulse 2s infinite; }
+  @keyframes pulse { 50% { opacity: .4; } }
+  h1 { font-size: clamp(42px, 7vw, 84px); font-weight: 700; line-height: 1; letter-spacing: -0.03em; margin-bottom: 20px; }
+  h1 .grad { background: linear-gradient(100deg, #d97706, #f97316 55%, #eab308); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { color: var(--mut); font-size: clamp(15px, 2vw, 18px); max-width: 620px; margin: 0 auto 32px; line-height: 1.65; }
+  .sub b { color: var(--ink); }
+  .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; background: #0c0a09; color: #fff; font-weight: 700; font-size: 14px; padding: 14px 30px; border-radius: 999px; text-decoration: none; transition: transform .15s, box-shadow .2s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,.2); }
+  .btn.amber { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .ver { margin-top: 16px; font-size: 12px; color: var(--mut); }
+  section { padding: 72px 0 0; }
+  .kicker { font-size: 11px; font-weight: 700; letter-spacing: .22em; color: var(--amber); text-transform: uppercase; margin-bottom: 12px; }
+  h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .lead { color: var(--mut); font-size: 16px; max-width: 620px; line-height: 1.65; }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 36px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 28px 24px; box-shadow: 0 2px 14px rgba(0,0,0,.03); transition: transform .2s, box-shadow .2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,.08); }
+  .card .ic { width: 42px; height: 42px; border-radius: 13px; background: rgba(217,119,6,.1); color: var(--amber); display: flex; align-items: center; justify-content: center; font-size: 17px; margin-bottom: 16px; }
+  .card h3 { font-size: 17px; margin-bottom: 8px; }
+  .card p { color: var(--mut); font-size: 14px; line-height: 1.65; }
+  .dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 36px; }
+  .dlcard { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 30px 26px; display: flex; flex-direction: column; gap: 12px; }
+  .dlcard.hero-dl { border: 2px solid #f59e0b; box-shadow: 0 18px 44px rgba(245,158,11,.16); }
+  .dlcard h3 { font-size: 19px; display: flex; align-items: center; gap: 10px; }
+  .dlcard p { color: var(--mut); font-size: 14px; line-height: 1.6; }
+  .dlcard .btn { margin-top: auto; justify-content: center; }
+  .cmd { background: #0c0a09; color: #e7e5e4; border-radius: 12px; padding: 12px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; overflow-x: auto; white-space: nowrap; }
+  .soon { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mut); background: #f5f5f4; border-radius: 999px; padding: 3px 12px; }
+  footer { padding: 56px 0 46px; color: var(--mut); font-size: 13px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+  footer a { color: var(--mut); text-decoration: none; margin-left: 20px; }
+  footer a:hover { color: var(--amber); }
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>ORIN&nbsp;CODE</div>
+    <div class="navlinks">
+      <a href="#download">Download</a>
+      <a href="#features">Features</a>
+      <a href="#more">CLI &amp; VS Code</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <svg class="emblem" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><linearGradient id="tile" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f59e0b" /><stop offset="1" stop-color="#ea580c" />
+    </linearGradient></defs>
+    <rect width="32" height="32" rx="8" fill="url(#tile)" />
+    <path d="M18 6L8 18H14L12 26L22 14H16L18 6Z" fill="white" />
+  </svg>
+  <div class="pill"><span class="live"></span><span class="mono">v4.0.1 · free forever</span></div>
+  <h1>Your AI coding<br /><span class="grad">workspace.</span></h1>
+  <p class="sub">Orin Code is a <b>free desktop app</b> for Windows: chat with Orin Cloud, an IDE with terminal, MCP tools, computer use, and phone approvals from Telegram. No API keys. No subscriptions.</p>
+  <div class="cta">
+    <a class="btn amber" href="https://github.com/januththedev/Orin-Code/releases/download/V4.0.1/Orin.AI.Setup.4.0.1.x64.exe"><i class="fa-brands fa-windows"></i>Download for Windows</a>
+    <a class="btn ghost" href="#more"><i class="fa-solid fa-terminal"></i>CLI &amp; VS Code</a>
+  </div>
+  <p class="ver mono">Orin.AI.Setup.4.0.1.x64.exe · Windows 10/11 x64 · no admin needed</p>
+</header>
+
+<section class="wrap reveal" id="download">
+  <p class="kicker">Get it</p>
+  <h2>Download Orin Code.</h2>
+  <p class="lead">One installer for Windows. macOS and Linux builds are on the roadmap — the CLI below already runs everywhere Node does.</p>
+  <div class="dl">
+    <div class="dlcard hero-dl">
+      <h3><i class="fa-brands fa-windows"></i>Windows</h3>
+      <p>Full desktop app: chat, IDE, terminal, artifacts, Studio, computer use, Telegram phone link. Signs in with your orinai.org account.</p>
+      <a class="btn amber" href="https://github.com/januththedev/Orin-Code/releases/download/V4.0.1/Orin.AI.Setup.4.0.1.x64.exe">Download .exe</a>
+    </div>
+    <div class="dlcard">
+      <h3><i class="fa-brands fa-apple"></i>macOS <span class="soon">soon</span></h3>
+      <p>Tauri builds for Apple Silicon and Intel are planned. Until then: the CLI and the web app at orinai.org cover every workflow.</p>
+    </div>
+    <div class="dlcard">
+      <h3><i class="fa-brands fa-linux"></i>Linux <span class="soon">soon</span></h3>
+      <p>.AppImage and .deb builds are planned. Until then: the CLI runs natively on any Linux with Node 18+.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="features">
+  <p class="kicker">Inside</p>
+  <h2>An IDE that thinks with you.</h2>
+  <div class="grid3">
+    <div class="card"><div class="ic"><i class="fa-solid fa-comments"></i></div><h3>Orin Cloud chat</h3><p>Free-tier OpenRouter models with auto-routing, thinking traces, artifacts, and history search.</p></div>
+    <div class="card"><div class="ic"><i class="fa-solid fa-code"></i></div><h3>IDE + terminal</h3><p>File explorer, editor panel, and a real terminal pane — agent edits land directly in your project.</p></div>
+    <div class="card"><div class="ic"><i class="fa-solid fa-plug"></i></div><h3>MCP + connectors</h3><p>Model Context Protocol servers and service connectors, managed from Settings.</p></div>
+    <div class="card"><div class="ic"><i class="fa-solid fa-mobile-screen"></i></div><h3>Phone approvals</h3><p>Agent runs pause for your approval — approve from the Orin Code Telegram bot on your phone.</p></div>
+    <div class="card"><div class="ic"><i class="fa-solid fa-computer-mouse"></i></div><h3>Computer use</h3><p>Opt-in UI control with a strict policy gate: the agent sees and clicks only what you allow.</p></div>
+    <div class="card"><div class="ic"><i class="fa-solid fa-palette"></i></div><h3>Studio</h3><p>White-label generation workspace: text, images, and media flows in one place.</p></div>
+  </div>
+</section>
+
+<section class="wrap reveal" id="more">
+  <p class="kicker">Everywhere else</p>
+  <h2>CLI &amp; VS Code.</h2>
+  <div class="dl">
+    <div class="dlcard">
+      <h3><i class="fa-solid fa-terminal"></i>orin CLI</h3>
+      <p>Chat, search, and run code from any terminal. Zero dependencies, Node 18+.</p>
+      <div class="cmd">npm i -g orin-code-cli</div>
+      <a class="btn ghost" href="https://github.com/januththedev/orin-code-cli">GitHub repo</a>
+    </div>
+    <div class="dlcard">
+      <h3><i class="fa-solid fa-code"></i>VS Code extension</h3>
+      <p>Sidebar chat, Explain selection, Deep reasoning toggle. No Telegram in the extension — chat and code only.</p>
+      <div class="cmd">git clone + npm run compile</div>
+      <a class="btn ghost" href="https://github.com/januththedev/orin-code-vscode">GitHub repo</a>
+    </div>
+    <div class="dlcard">
+      <h3><i class="fa-solid fa-robot"></i>Orin Agent</h3>
+      <p>The autonomous sibling: full harness, plan mode, trajectories, MCP, computer use — as its own desktop app.</p>
+      <a class="btn ghost" href="https://github.com/januththedev/orin-agent">GitHub repo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>ORIN&nbsp;CODE <span style="color:var(--mut);font-weight:400;margin-left:10px">free for life · made by <a href="https://januth.dev" target="_blank" style="margin:0;color:var(--amber);font-weight:700">Januth</a></span></div>
+    <div>
+      <a href="https://github.com/januththedev/Orin-Code" target="_blank">App repo</a>
+      <a href="https://orinai.org" target="_blank">Orin AI</a>
+      <a href="https://januth.dev" target="_blank">Januth</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
